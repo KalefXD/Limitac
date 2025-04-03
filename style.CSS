@@ -1,0 +1,135 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #fdfdfd;
+}
+
+main {
+    display: grid;
+    gap: 20px;
+}
+
+h1 {
+    text-align: center;
+    text-wrap: balance;
+    color: #333;
+}
+
+.game-container {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    gap: 20px;
+}
+
+h2,
+.status {
+    font-size: 1.2rem;
+    color: #333;
+    margin-block: 0.4rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.cell {
+    position: relative;
+    width: clamp(60px, 15vw, 100px);
+    aspect-ratio: 1/1;
+    font-size: clamp(2rem, 10vw - 0.5rem, 4rem);
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 4px;
+}
+
+.cell:hover,
+.cell:focus-visible {
+    background-color: #eee;
+    border: 2px solid #000;
+}
+
+.old {
+    text-decoration: underline;
+}
+
+.marker-X {
+    color: #44f;
+}
+
+.marker-X.old {
+    color: #aaf;
+}
+
+.marker-O {
+    color: #f44;
+}
+
+.marker-O.old {
+    color: #faa;
+}
+
+.winning {
+    color: #4d5;
+}
+
+.marker-cell {
+    position: absolute;
+    pointer-events: none;
+    top: 5px;
+    left: 5px;
+    font-size: 0.6rem;
+    color: #ddd;
+}
+
+.marker-order {
+    position: absolute;
+    pointer-events: none;
+    top: 5px;
+    right: 5px;
+    font-size: 0.6rem;
+}
+
+.reset-btn {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6rem 1.4rem;
+    background-color: #4d5;
+    cursor: pointer;
+}
+
+.reset-btn:hover, .reset-btn:focus-visible {
+    background-color: #5e7;
+}
+
+.reset-btn:focus-visible {
+    outline: 2px solid #4d5;
+}
+
+.instructions {
+    margin: auto;
+    max-width: 520px;
+    padding: 0.5rem 1rem;
+}
+
+p {
+    text-wrap: pretty;
+}
