@@ -6,17 +6,18 @@
 
 body {
     display: grid;
-    align-items: center;
-    justify-content: center;
+    gap: 20px;
     min-height: 100dvh;
     font-family: Arial, sans-serif;
-    margin: 0;
     background-color: #fdfdfd;
 }
 
+header {
+    align-self: end;
+}
+
 main {
-    display: grid;
-    gap: 20px;
+    align-self: center;
 }
 
 h1 {
@@ -94,7 +95,7 @@ h2,
     top: 5px;
     left: 5px;
     font-size: 0.6rem;
-    color: #ddd;
+    color: #ccc;
 }
 
 .marker-order {
@@ -124,8 +125,9 @@ h2,
     outline: 2px solid #4d5;
 }
 
-.instructions {
-    margin: auto;
+.instructions-container {
+    align-self: start;
+    margin-inline: auto;
     max-width: 520px;
     padding: 0.5rem 1rem;
 }

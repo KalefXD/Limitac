@@ -4,32 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Tic Tac Toe Limitado</title>
+    <title>Limitac</title>
+    <meta name="description" content="Limitac: Juego de Tic Tac Toe con límite de tres marcas. Cuando un jugador coloca la cuarta marca, se elimina la más antigua.">  
     <link rel="stylesheet" href="style.CSS">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
     <script src="main.JS"></script>
 </head>
 
 <body>
+    <header>
+        <h1>Limitac - Límite de Tres Marcas</h1>
+    </header>
+
     <main>
-        <h1>Tic Tac Toe - Límite de Tres Marcas</h1>
+        <section class="game-container" aria-label="Sección principal del juego">
+            <h2 class="status" id="status" aria-live="polite">Turno del Jugador X</h2>
 
-        <section class="game-container">
-            <h2 class="status" id="status">Turno del Jugador X</h2>
-
-            <div class="board" id="board">
-                <!-- Celdas del tablero generadas en JavaScript -->
+            <div class="board" id="board" role="grid" aria-label="Tablero de Tic Tac Toe" aria-describedby="instructions">
+                <!-- Casillas del tablero generadas en JavaScript -->
             </div>
 
-            <button class="reset-btn" id="resetBtn">Reiniciar Juego</button>
-        </section>
-
-        <section class="instructions">
-            <h2>Instrucciones:</h2>
-            <p>
-                Cada jugador puede tener solo tres marcas; al colocar una cuarta, se elimina la más antigua, indicada por el número más bajo.
-            </p>
+            <button class="reset-btn" id="resetBtn" aria-label="Reiniciar Juego">Reiniciar Juego</button>
         </section>
     </main>
+
+    <section class="instructions-container">
+        <h2>Instrucciones:</h2>
+        <p id="instructions">
+            Cada jugador puede tener solo tres marcas; al colocar una cuarta, se elimina la más antigua, indicada por el número más bajo.
+        </p>
+    </section>
 </body>
 
 </html>

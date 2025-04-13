@@ -1,7 +1,7 @@
-# Un Tic Tac Toe Limitado
+# Limitac
 Un HTML; un CSS y un JS para un Tic Tac Toe con una nueva regla que limita la cantidad de marcas en el tablero.
 
-Juegalo aquí: https://kalefxd.github.io/Un-Tic-Tac-Toe-Limitado
+Juegalo aquí: https://kalefxd.github.io/Limitac
 
 ## Instrucciones nuevas del juego:
 - Cada jugador solo puede tener tres marcas (X u O) en el tablero a la vez. (Sólo pueden haber 6 marcas en total en el tablero)
@@ -9,9 +9,10 @@ Juegalo aquí: https://kalefxd.github.io/Un-Tic-Tac-Toe-Limitado
 
 ---
 
-![Vista previa del sitio 1](image-preview-1.png)
-
-![Vista previa del sitio 2](image-preview-2.png)
+## Capturas
+| Turno de la casilla 5X | Juego gando por X |
+|------------------------|-------------------|
+| ![Preview 1](assets/image-preview-1.png) | ![Preview 2](assets/image-preview-2.png) |
 
 ---
 

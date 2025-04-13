@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('resetBtn');
 
     const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],   // Filas
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],  // Columnas
+        [0, 1, 2], [3, 4, 5], [6, 7, 8]  // Filas
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columnas
         [0, 4, 8], [2, 4, 6]             // Diagonales
     ];
 
@@ -17,13 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let oMoves = [];
     let moves = 0;
 
-    // Crear celdas del tablero
+    // Crear casillas del tablero
     cellIndexs.forEach((i) => {
         const cell = document.createElement('button');
         cell.classList.add('cell');
         cell.setAttribute('data-index', i);
-        cell.setAttribute('aria-label', `Celda ${i + 1}`);
-        cell.setAttribute('role', 'button');
+        cell.setAttribute('aria-label', `Casilla ${i + 1}`);
+        cell.setAttribute('aria-live', 'polite');
+        cell.setAttribute('role', 'gridcell');
         cell.addEventListener('click', () => handleCellClick(i, cell));
         board.appendChild(cell);
         updateCellContent(cell, i + 1, true);
@@ -49,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkWin()) {
             status.textContent = `¡El jugador ${currentPlayer} gana!`;
             document.querySelectorAll(`.cell`).forEach(cell => {
-              if (cell.textContent.includes(`${currentPlayer}`)) cell.classList.add('winning');
+                cell.setAttribute('aria-disabled', true);
+                if (cell.textContent.includes(`${currentPlayer}`)) cell.classList.add('winning');
             });
             gameActive = false;
             resetBtn.focus();
@@ -64,8 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCellContent(cell, content, reset = false, player = '') {
         if (reset && cell.getAttribute('tabindex') === '0') return;
         if (reset) cell.className = 'cell';
+        cell.setAttribute('aria-disabled', !reset);
         cell.setAttribute('tabindex', reset ? '0' : '-1');
-        cell.classList.toggle(`marker-${player}`, !reset && player !== '')
+        cell.classList.toggle(`marker-${player}`, !reset && player !== '');
         cell.innerHTML = reset
             ? `<span class="marker-cell">${content}</span>`
             : `${player}<span class="marker-order">${content}</span>`;
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         moves = 0;
 
         document.querySelectorAll('.cell').forEach((cell, index) => {
+            cell.setAttribute('aria-disabled', false);
             updateCellContent(cell, cellIndexs[index] + 1, true);
         });
 
