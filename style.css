@@ -1,0 +1,182 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --bg-body: linear-gradient(#222, #111);
+    --bg-body-after: radial-gradient(ellipse at center, #3334 0%, #2224 80%, #2221 100%);
+    --text-color: #eee;
+    --bg-color-resetBtn: #111;
+    --bg-color-hover-resetBtn: #222;
+    --bg-cell: #111;
+    --bg-hover-cell: #181818;
+    --outline-color-board: #0002;
+    --color-marker-cell: #333;
+    --color-marker-X: #46f;
+    --color-marker-O: #f46;
+    --color-marker-X-old: #34a;
+    --color-marker-O-old: #a34;
+    --color-winning: #6d6;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-body: linear-gradient(#fff, #eee);
+        --bg-body-after: radial-gradient(ellipse at center, #fff8 80%, #eee 100%);
+        --text-color: #222;
+        --bg-color-resetBtn: #4d5;
+        --bg-color-hover-resetBtn: #5e7;
+        --bg-cell: #fff;
+        --bg-hover-cell: #eee;
+        --outline-color-board: #0001;
+        --color-marker-cell: #ddd;
+        --color-marker-X: #44f;
+        --color-marker-O: #f44;
+        --color-marker-X-old: #aaf;
+        --color-marker-O-old: #faa;
+        --color-winning: #4d5;
+    }
+}
+
+body {
+    display: grid;
+    gap: 20px;
+    min-height: 100dvh;
+    color: var(--text-color);
+    font-family: system-ui, -apple-system, math;
+    background: var(--bg-body) fixed;
+
+    &::after {
+        position: fixed;
+        z-index: -1;
+        display: block;
+        content: '';
+        width: 100vw;
+        height: 100dvh;
+        background: var(--bg-body-after);
+    }
+}
+
+header {
+    align-self: end;
+}
+
+main {
+    align-self: center;
+}
+
+h1 {
+    text-align: center;
+    text-wrap: balance;
+}
+
+.game-container {
+    display: grid;
+    justify-items: center;
+    gap: 20px;
+}
+
+h2,
+#status {
+    font-size: 1.2rem;
+    margin-block: 0.4rem;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 2px;
+    background-color: #222;
+    border-radius: 6px;
+    outline: .5rem solid var(--outline-color-board);
+}
+
+.cell {
+    position: relative;
+    width: clamp(60px, 15vw, 100px);
+    aspect-ratio: 1/1;
+    font-size: clamp(2rem, 10vw - 0.5rem, 4rem);
+    cursor: pointer;
+    background: var(--bg-cell);
+    border: none;
+    border-radius: 4px;
+
+    &:hover, &:focus-visible {
+      background: var(--bg-hover-cell);
+    }
+}
+
+.old {
+    text-decoration: underline;
+}
+
+.marker-X {
+    color: var(--color-marker-X);
+
+    &.old {
+        color: var(--color-marker-X-old);
+    }
+}
+
+.marker-O {
+    color: var(--color-marker-O);
+
+    &.old {
+        color: var(--color-marker-O-old);
+    }
+}
+
+.winning {
+    color: var(--color-winning);
+    text-decoration: underline;
+}
+
+.marker-cell {
+    position: absolute;
+    pointer-events: none;
+    top: 5px;
+    left: 5px;
+    font-size: 0.6rem;
+    color: var(--color-marker-cell);
+}
+
+.marker-order {
+    position: absolute;
+    pointer-events: none;
+    top: 5px;
+    right: 5px;
+    font-size: 0.6rem;
+}
+
+#resetBtn {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6em 1.4em;
+    background-color: var(--bg-color-resetBtn);
+    cursor: pointer;
+
+    &:hover, &:focus-visible {
+        background-color: var(--bg-color-hover-resetBtn);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--bg-color-resetBtn);
+    }
+}
+
+.instructions-container {
+    align-self: start;
+    margin-inline: auto;
+    max-width: 520px;
+    padding: 0.5rem 1rem;
+}
+
+p {
+    text-wrap: pretty;
+}

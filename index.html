@@ -2,13 +2,30 @@
 <html lang="es">
 
 <head>
+    <title>Limitac - Juego de Tic Tac Toe con límite de tres marcas</title>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limitac</title>
-    <meta name="description" content="Limitac: Juego de Tic Tac Toe con límite de tres marcas. Cuando un jugador coloca la cuarta marca, se elimina la más antigua.">  
-    <link rel="stylesheet" href="style.CSS">
+    <meta name="description" content="Limitac: Juego de Tic Tac Toe con límite de tres marcas. Cuando un jugador coloca la cuarta marca, se elimina la más antigua.">
+    <meta name="keywords" content="Limitac, Tic Tac Toe, Limite de 3 marcas, Tres en raya">
+    <meta name="author" content="KalefXD9876">
+
+    <meta property="og:title" content="Limitac - Juego de Tic Tac Toe con límite de tres marcas">
+    <meta property="og:description" content="Limitac: Juego de Tic Tac Toe con límite de tres marcas. Cuando un jugador coloca la cuarta marca, se elimina la más antigua.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kalefxd.github.io/Limitac">
+    <meta property="og:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content=">Limitac - Juego de Tic Tac Toe con límite de tres marcas">
+    <meta name="twitter:description" content="Limitac: Juego de Tic Tac Toe con límite de tres marcas. Cuando un jugador coloca la cuarta marca, se elimina la más antigua.">
+    <meta name="twitter:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
+    <meta name="twitter:site" content="@KalefXD9876">
+
+    <meta name="theme-color" content="#181818">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <script src="main.JS"></script>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
 </head>
 
 <body>
@@ -18,13 +35,13 @@
 
     <main>
         <section class="game-container" aria-label="Sección principal del juego">
-            <h2 class="status" id="status" aria-live="polite">Turno del Jugador X</h2>
+            <h2 id="status" aria-live="polite">Turno del Jugador X</h2>
 
-            <div class="board" id="board" role="grid" aria-label="Tablero de Tic Tac Toe" aria-describedby="instructions">
+            <div id="board" role="grid" aria-label="Tablero de Tic Tac Toe" aria-describedby="instructions">
                 <!-- Casillas del tablero generadas en JavaScript -->
             </div>
 
-            <button class="reset-btn" id="resetBtn" aria-label="Reiniciar Juego">Reiniciar Juego</button>
+            <button id="resetBtn" aria-label="Reiniciar Juego">Reiniciar</button>
         </section>
     </main>
 

@@ -10,8 +10,8 @@ Juegalo aquí: https://kalefxd.github.io/Limitac
 ---
 
 ## Capturas
-| Turno de la casilla 5X | Juego ganado por X |
-|------------------------|--------------------|
+| Turno de la casilla 2 de X | Juego ganado por X |
+|----------------------------|--------------------|
 | ![Preview 1](assets/image-preview-1.png) | ![Preview 2](assets/image-preview-2.png) |
 
 ---
