@@ -1,3 +1,15 @@
+const currentLang = document.documentElement.lang || "en";
+const translation = {
+    en: {
+        statusTurn: () =>  `Player ${currentPlayer}'s turn`,
+        statusWin: () => `Player ${currentPlayer} wins!`,
+    },
+    es: {
+        statusTurn: () => `Turno del Jugador ${currentPlayer}`,
+        statusWin: () => `¡El jugador ${currentPlayer} gana!`,
+    }
+};
+
 const board = document.getElementById('board');
 const gameStatus = document.getElementById('status');
 const resetBtn = document.getElementById('resetBtn');
@@ -19,16 +31,8 @@ let oMoves = [];
 let moves = 0;
 
 // Crear casillas del tablero
-cellIndexs.forEach((i) => {
-    const cell = document.createElement('button');
-    cell.classList.add('cell');
-    cell.setAttribute('data-index', i);
-    cell.setAttribute('aria-label', `Casilla ${i + 1}`);
-    cell.setAttribute('aria-live', 'polite');
-    cell.setAttribute('role', 'gridcell');
-    cell.addEventListener('click', () => handleCellClick(i, cell));
-    board.appendChild(cell);
-    updateCellContent(cell, i + 1, true);
+document.querySelectorAll('.cell').forEach((cell, index) => {
+    updateCellContent(cell, cellIndexs[index] + 1, true);
 });
 
 function handleCellClick(cellIndex, cell) {
@@ -49,7 +53,7 @@ function handleCellClick(cellIndex, cell) {
     updateCellContent(cell, moves, false, currentPlayer);
 
     if (checkWin()) {
-        gameStatus.textContent = `¡El jugador ${currentPlayer} gana!`;
+        gameStatus.textContent = translation[currentLang].statusWin();
         document.querySelectorAll(`.cell`).forEach(cell => {
             cell.setAttribute('aria-disabled', true);
             if (cell.textContent.includes(`${currentPlayer}`)) cell.classList.add('winning');
@@ -60,7 +64,7 @@ function handleCellClick(cellIndex, cell) {
     }
 
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    gameStatus.textContent = `Turno del Jugador ${currentPlayer}`;
+    gameStatus.textContent = translation[currentLang].statusTurn();
     highlightOldestMove(currentPlayer === 'X' ? xMoves : oMoves);
 }
 
@@ -107,7 +111,7 @@ function resetGame() {
         updateCellContent(cell, cellIndexs[index] + 1, true);
     });
 
-    gameStatus.textContent = "Turno del Jugador X";
+    gameStatus.textContent = translation[currentLang].statusTurn();
 }
 
 document.addEventListener('keydown', handleKeyDown);

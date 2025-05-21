@@ -1,22 +1,27 @@
 # Limitac
-Un HTML; un CSS y un JS para un Tic Tac Toe con una nueva regla que limita la cantidad de marcas en el tablero.
+A different Tic Tac Toe with a new rule: **only three marks per player!**
 
-Juegalo aquí: https://kalefxd.github.io/Limitac
-
-## Instrucciones nuevas del juego:
-- Cada jugador solo puede tener tres marcas (X u O) en el tablero a la vez. (Sólo pueden haber 6 marcas en total en el tablero)
-- Cuando un jugador ya tiene tres marcas y quiere hacer una nueva jugada, automáticamente se elimina su marca más antigua del tablero. (Cada marca muestra un pequeño número que indica el orden en que fue colocada, la más antigua cambiara de color, para que los jugadores puedan saber cuál será la próxima en ser eliminada)
+Play it here:
+- [English version](https://kalefxd.github.io/Limitac/)
+- [Spanish version](https://kalefxd.github.io/Limitac/es/)  
 
 ---
 
-## Capturas
-| Turno de la casilla 2 de X | Juego ganado por X |
-|----------------------------|--------------------|
+## What makes this game special?
+
+- Each player can have only three marks (X or O) on the board at the same time (a maximum of 6 marks in total).
+- If a player already has three marks and wants to make a new move, their oldest mark is automatically removed from the board (each mark shows a small number indicating the order it was placed).
+- You can switch the language from the top menu!
+
+---
+
+## Screenshots
+
+| X's turn on cell 2 | X wins the game |
+|--------------------|-----------------|
 | ![Preview 1](assets/image-preview-1.png) | ![Preview 2](assets/image-preview-2.png) |
 
 ---
 
-> [!IMPORTANT]\
-> Este repositorio es solo una muestra de mi aprendizaje en JavaScript. No me esforcé demasiado en el diseño, ya que mi enfoque principal es mejorar mis habilidades de programación. Estoy aprendiendo con la ayuda de la inteligencia artificial.
-> 
-> Si tienes algún consejo o sugerencia para mejorar, no dudes en decirmelo. ¡Gracias!
+> [!IMPORTANT]  
+> This repository is just a demonstration of my learning in JavaScript and web development. Any advice or suggestions for improvement are very welcome!

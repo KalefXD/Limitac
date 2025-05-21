@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
-    <title>Limitac - Juego de Tic Tac Toe con límite de tres marcas</title>
+    <title>Limitac - Tic Tac Toe game with a three-mark limit</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Limitac implementa una nueva regla que limita la cantidad de marcas en el tablero. Cuando un jugador coloca una cuarta marca, se elimina la más antigua.">
-    <meta name="keywords" content="Limitac, Tic Tac Toe, Limite de 3 marcas, Tres en raya">
-    <meta name="author" content="KalefXD9876">
+    <meta name="description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
+    <meta name="keywords" content="Limitac, Tic Tac Toe, three mark limit, Tic Tac Toe game">
+    <meta name="author" content="KalefXD">
+    <link rel="alternate" hreflang="en" href="https://kalefxd.github.io/Limitac/" />
+    <link rel="alternate" hreflang="es" href="https://kalefxd.github.io/Limitac/es/" />
 
-    <meta property="og:title" content="Limitac - Juego de Tic Tac Toe con límite de tres marcas">
-    <meta property="og:description" content="Limitac implementa una nueva regla que limita la cantidad de marcas en el tablero. Cuando un jugador coloca una cuarta marca, se elimina la más antigua.">
+    <meta property="og:title" content="Limitac - Tic Tac Toe game with a three-mark limit">
+    <meta property="og:description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kalefxd.github.io/Limitac">
     <meta property="og:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content=">Limitac - Juego de Tic Tac Toe con límite de tres marcas">
-    <meta name="twitter:description" content="Limitac implementa una nueva regla que limita la cantidad de marcas en el tablero. Cuando un jugador coloca una cuarta marca, se elimina la más antigua.">
+    <meta name="twitter:title" content="Limitac - Tic Tac Toe game with a three-mark limit">
+    <meta name="twitter:description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
     <meta name="twitter:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
     <meta name="twitter:site" content="@KalefXD9876">
 
@@ -29,26 +31,36 @@
 </head>
 
 <body>
+    <small class="lang-link" aria-label="Change language to Spanish"><a href="./es/">Español</a></small>
+
     <header>
-        <h1>Limitac - Límite de Tres Marcas</h1>
+        <h1>Limitac - Three Mark Limit</h1>
     </header>
 
     <main>
-        <section class="game-container" aria-label="Sección principal del juego">
-            <h2 id="status" aria-live="polite">Turno del Jugador X</h2>
+        <section class="game-container" aria-label="Main game section">
+            <h2 id="status" aria-live="polite">Player X's turn</h2>
 
-            <div id="board" role="grid" aria-label="Tablero de Tic Tac Toe" aria-describedby="instructions">
-                <!-- Casillas del tablero generadas en JavaScript -->
+            <div id="board" role="grid" aria-label="Tic Tac Toe Board" aria-describedby="instructions">
+                <button class="cell" data-index="6" aria-label="Cell 7" aria-live="polite" role="gridcell" onclick="handleCellClick(6, this)"></button>
+                <button class="cell" data-index="7" aria-label="Cell 8" aria-live="polite" role="gridcell" onclick="handleCellClick(7, this)"></button>
+                <button class="cell" data-index="8" aria-label="Cell 9" aria-live="polite" role="gridcell" onclick="handleCellClick(8, this)"></button>
+                <button class="cell" data-index="3" aria-label="Cell 4" aria-live="polite" role="gridcell" onclick="handleCellClick(3, this)"></button>
+                <button class="cell" data-index="4" aria-label="Cell 5" aria-live="polite" role="gridcell" onclick="handleCellClick(4, this)"></button>
+                <button class="cell" data-index="5" aria-label="Cell 6" aria-live="polite" role="gridcell" onclick="handleCellClick(5, this)"></button>
+                <button class="cell" data-index="0" aria-label="Cell 1" aria-live="polite" role="gridcell" onclick="handleCellClick(0, this)"></button>
+                <button class="cell" data-index="1" aria-label="Cell 2" aria-live="polite" role="gridcell" onclick="handleCellClick(1, this)"></button>
+                <button class="cell" data-index="2" aria-label="Cell 3" aria-live="polite" role="gridcell" onclick="handleCellClick(2, this)"></button>
             </div>
 
-            <button id="resetBtn" aria-label="Reiniciar Juego">Reiniciar</button>
+            <button id="resetBtn" aria-label="Reiniciar Juego">Reset</button>
         </section>
     </main>
 
     <section class="instructions-container">
-        <h2>Instrucciones:</h2>
+        <h2>Instructions:</h2>
         <p id="instructions">
-            Cada jugador puede tener solo tres marcas; al colocar una cuarta, se elimina la más antigua, indicada por el número más bajo.
+            Each player can have only three marks; when placing a fourth, the oldest one is removed, indicated by the lowest number.
         </p>
     </section>
 </body>
