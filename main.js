@@ -13,8 +13,6 @@ const translation = {
 const board = document.getElementById('board');
 const gameStatus = document.getElementById('status');
 const resetBtn = document.getElementById('resetBtn');
-const backwardBtn = document.getElementById('backwardBtn');
-const forwardBtn = document.getElementById('forwardBtn');
 
 const winPatterns = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Filas
@@ -26,11 +24,10 @@ const cellIndexs = [6, 7, 8, 3, 4, 5, 0, 1, 2];
 let currentPlayer = 'X';
 let gameActive = true;
 let gameState = Array(9).fill('');
+let movesCount = 0;
 let xMoves = [];
 let oMoves = [];
-let moves = 0;
 
-// Crear casillas del tablero
 document.querySelectorAll('.cell').forEach((cell, index) => {
     updateCellContent(cell, cellIndexs[index] + 1, true);
 });
@@ -47,10 +44,10 @@ function handleCellClick(cellIndex, cell) {
         updateCellContent(document.querySelector(`[data-index="${oldestMoveIndex}"]`), oldestMoveIndex + 1, true);
     }
 
-    moves++;
+    movesCount++;
     currentMoves.push(cellIndex);
     gameState[cellIndex] = currentPlayer;
-    updateCellContent(cell, moves, false, currentPlayer);
+    updateCellContent(cell, movesCount, false, currentPlayer);
 
     if (checkWin()) {
         gameStatus.textContent = translation[currentLang].statusWin();
@@ -80,7 +77,7 @@ function updateCellContent(cell, content, reset = false, player = '') {
 }
 
 function highlightOldestMove(moves) {
-    document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('old'));
+    if (document.querySelector('.old')) document.querySelector('.old').classList.remove('old');
     if (moves.length >= 3) {
         const oldestMoveIndex = moves[0];
         document.querySelector(`[data-index="${oldestMoveIndex}"]`).classList.add('old');
@@ -96,15 +93,13 @@ function checkWin() {
     });
 }
 
-resetBtn.addEventListener('click', resetGame);
-
 function resetGame() {
     currentPlayer = 'X';
     gameActive = true;
     gameState = Array(9).fill('');
+    movesCount = 0;
     xMoves = [];
     oMoves = [];
-    moves = 0;
 
     document.querySelectorAll('.cell').forEach((cell, index) => {
         cell.setAttribute('aria-disabled', false);
@@ -119,7 +114,7 @@ document.addEventListener('keydown', handleKeyDown);
 function handleKeyDown(event) {
     if (event.key >= '1' && event.key <= '9') {
         const cell = document.querySelector(`.cell[data-index="${event.key - 1}"]`);
-        cell.focus();
+        if (cell.getAttribute('aria-disabled') === 'false') cell.focus();
     } else if (event.key === '0') {
         resetBtn.focus();
     }

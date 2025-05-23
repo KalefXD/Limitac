@@ -17,9 +17,7 @@ Play it here:
 
 ## Screenshots
 
-| X's turn on cell 2 | X wins the game |
-|--------------------|-----------------|
-| ![Preview 1](assets/image-preview-1.png) | ![Preview 2](assets/image-preview-2.png) |
+![Preview](assets/image-preview-2.png)
 
 ---
 
