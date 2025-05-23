@@ -11,7 +11,6 @@ Play it here:
 
 - Each player can have only three marks (X or O) on the board at the same time (a maximum of 6 marks in total).
 - If a player already has three marks and wants to make a new move, their oldest mark is automatically removed from the board (each mark shows a small number indicating the order it was placed).
-- You can switch the language from the top menu!
 
 ---
 

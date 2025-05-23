@@ -8,11 +8,12 @@
     --bg-body: linear-gradient(#222, #111);
     --bg-body-after: radial-gradient(ellipse at center, #3334 0%, #2224 80%, #2221 100%);
     --text-color: #eee;
+    --bg-color-board: #222;
+    --outline-color-board: #0002;
     --bg-color-resetBtn: #111;
     --bg-color-hover-resetBtn: #222;
     --bg-cell: #111;
     --bg-hover-cell: #181818;
-    --outline-color-board: #0002;
     --color-marker-cell: #333;
     --color-marker-X: #46f;
     --color-marker-O: #f46;
@@ -26,11 +27,12 @@
         --bg-body: linear-gradient(#fff, #eee);
         --bg-body-after: radial-gradient(ellipse at center, #fff8 80%, #eee 100%);
         --text-color: #222;
+        --bg-color-board: #888;
+        --outline-color-board: #0001;
         --bg-color-resetBtn: #4d5;
         --bg-color-hover-resetBtn: #5e7;
         --bg-cell: #fff;
         --bg-hover-cell: #eee;
-        --outline-color-board: #0001;
         --color-marker-cell: #ddd;
         --color-marker-X: #44f;
         --color-marker-O: #f44;
@@ -63,6 +65,7 @@ body {
     position: fixed;
     top: 1em;
     right: 1em;
+
     a {
         color: inherit;
         opacity: .4;
@@ -91,7 +94,7 @@ h1 {
 .game-container {
     display: grid;
     justify-items: center;
-    gap: 20px;
+    gap: 1em;
 }
 
 h2,
@@ -105,7 +108,7 @@ h2,
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
     padding: 2px;
-    background-color: #222;
+    background-color: var(--bg-color-board);
     border-radius: 6px;
     outline: .5em solid var(--outline-color-board);
 }
