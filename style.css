@@ -5,13 +5,13 @@
 }
 
 :root {
-    --bg-body: linear-gradient(#222, #111);
-    --bg-body-after: radial-gradient(ellipse at center, #3334 0%, #2224 80%, #2221 100%);
+    --bg-body-1: radial-gradient(ellipse at center, #3334 0%, #2224 80%, #2221 100%);
+    --bg-body-2: linear-gradient(#222, #111);
     --text-color: #eee;
-    --bg-color-board: #222;
-    --outline-color-board: #0002;
     --bg-color-resetBtn: #111;
     --bg-color-hover-resetBtn: #222;
+    --bh-board: #222;
+    --outline-color-board: #0002;
     --bg-cell: #111;
     --bg-hover-cell: #181818;
     --color-marker-cell: #333;
@@ -24,16 +24,16 @@
 
 @media (prefers-color-scheme: light) {
     :root {
-        --bg-body: linear-gradient(#fff, #eee);
-        --bg-body-after: radial-gradient(ellipse at center, #fff8 80%, #eee 100%);
+        --bg-body-1: radial-gradient(ellipse at center, #fff8 80%, #eee 100%);
+        --bg-body-2: linear-gradient(#fff, #eee);
         --text-color: #222;
-        --bg-color-board: #888;
-        --outline-color-board: #0001;
         --bg-color-resetBtn: #4d5;
         --bg-color-hover-resetBtn: #5e7;
+        --bh-board: #444;
+        --outline-color-board: #0001;
         --bg-cell: #fff;
         --bg-hover-cell: #eee;
-        --color-marker-cell: #ddd;
+        --color-marker-cell: #aaa;
         --color-marker-X: #44f;
         --color-marker-O: #f44;
         --color-marker-X-old: #aaf;
@@ -48,17 +48,7 @@ body {
     min-height: 100dvh;
     color: var(--text-color);
     font-family: system-ui, -apple-system, sans-serif;
-    background: var(--bg-body) fixed;
-
-    &::after {
-        position: fixed;
-        z-index: -1;
-        display: block;
-        content: '';
-        width: 100vw;
-        height: 100dvh;
-        background: var(--bg-body-after);
-    }
+    background: var(--bg-body-1) fixed, var(--bg-body-2) fixed;
 }
 
 .lang-link {
@@ -70,7 +60,7 @@ body {
         color: inherit;
         opacity: .4;
         text-decoration: none;
-        
+
         &:hover, &:focus {
             opacity: 1;
             text-decoration: underline;
@@ -89,6 +79,7 @@ main {
 h1 {
     text-align: center;
     text-wrap: balance;
+    padding-inline: 1rem;
 }
 
 .game-container {
@@ -98,7 +89,7 @@ h1 {
 }
 
 h2,
-#status {
+#gameStatus {
     font-size: 1.2rem;
     margin-block: .2em;
 }
@@ -107,24 +98,28 @@ h2,
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 4px;
-    padding: 2px;
-    background-color: var(--bg-color-board);
+    padding: 4px;
+    background: var(--bh-board);
     border-radius: 6px;
     outline: .5em solid var(--outline-color-board);
 }
 
 .cell {
     position: relative;
-    width: clamp(60px, 15vw, 100px);
     aspect-ratio: 1/1;
-    font-size: clamp(2rem, 10vw - 0.5rem, 4rem);
-    cursor: pointer;
+    width: clamp(60px, 24vw, 100px);
+    max-width: clamp(60px, 16dvh, 100px);
+    font-size: clamp(2em, min(11dvh, 17vw) - 0.5em, 4em);
     background: var(--bg-cell);
     border: none;
     border-radius: 4px;
 
-    &:hover, &:focus-visible {
-      background: var(--bg-hover-cell);
+    &:not([disabled]) {
+        cursor: pointer;
+
+        &:hover, &:focus-visible {
+            background: var(--bg-hover-cell);
+        }
     }
 }
 
@@ -158,8 +153,13 @@ h2,
     pointer-events: none;
     top: 5px;
     left: 5px;
+    display: none;
     font-size: .6rem;
     color: var(--color-marker-cell);
+
+    &:last-child {
+        display: revert;
+    }
 }
 
 .marker-order {

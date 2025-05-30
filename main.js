@@ -10,49 +10,92 @@ const translation = {
     }
 };
 
-const board = document.getElementById('board');
-const gameStatus = document.getElementById('status');
-const resetBtn = document.getElementById('resetBtn');
-
 const winPatterns = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Filas
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columnas
     [0, 4, 8], [2, 4, 6]             // Diagonales
 ];
 
-const cellIndexs = [6, 7, 8, 3, 4, 5, 0, 1, 2];
+const STORAGE_KEY = 'limitac:game';
+
+function saveGame() {
+    const data = {
+      currentPlayer,
+      gameActive,
+      gameState,
+      movesCount,
+      moves
+    };
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    catch (err) { console.warn('No fue posible guardar la partida:', err); }
+}
+
+// Guardar al cerrar o recargar
+window.addEventListener('beforeunload', saveGame);
+
+// Estado del juego
 let currentPlayer = 'X';
 let gameActive = true;
 let gameState = Array(9).fill('');
 let movesCount = 0;
-let xMoves = [];
-let oMoves = [];
+let moves = { X: [], O: [], total: [] };
 
-document.querySelectorAll('.cell').forEach((cell, index) => {
-    updateCellContent(cell, cellIndexs[index] + 1, true);
-});
+// Cargar juego guardado
+const saved = localStorage.getItem(STORAGE_KEY);
+if (saved) {
+    const { currentPlayer: cp, gameActive: ga, gameState: gs, movesCount: mc, moves: mv } = JSON.parse(saved);
+    // Restauramos
+    currentPlayer = cp;
+    gameActive = ga;
+    gameState = gs;
+    movesCount = (mc - 6) > 0 ? mc - 6 : 0;
+    moves = mv;
+
+    // Actualizar el estado del juego
+    moves.total.forEach(index => {
+        movesCount++;
+        const cell = document.querySelector(`[data-index="${index}"]`);
+        updateCellContent(cell, false, gameState[index]);
+    });
+
+    // Actualizar mensaje y resaltar
+    if (gameActive) {
+        gameStatus.textContent = translation[currentLang].statusTurn();
+        highlightOldestMove(moves[currentPlayer]);
+    } else {
+        gameStatus.textContent = translation[currentLang].statusWin();
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.disabled = true;
+            if (cell.textContent.includes(`${currentPlayer}`)) cell.classList.add('winning');
+        });
+    }
+
+    localStorage.removeItem(STORAGE_KEY);
+}
 
 function handleCellClick(cellIndex, cell) {
     if (!gameActive || gameState[cellIndex] !== '') return;
 
-    const currentMoves = currentPlayer === 'X' ? xMoves : oMoves;
+    const currentMoves = moves[currentPlayer];
 
-    // Eliminar la celda más antigua
+    // Elimina la última jugada si el jugador tiene más de 3 jugadas.
     if (currentMoves.length >= 3) {
         const oldestMoveIndex = currentMoves.shift();
+        moves.total.shift();
         gameState[oldestMoveIndex] = '';
-        updateCellContent(document.querySelector(`[data-index="${oldestMoveIndex}"]`), oldestMoveIndex + 1, true);
+        updateCellContent(document.querySelector(`[data-index="${oldestMoveIndex}"]`), true);
     }
 
     movesCount++;
     currentMoves.push(cellIndex);
+    moves.total.push(cellIndex);
     gameState[cellIndex] = currentPlayer;
-    updateCellContent(cell, movesCount, false, currentPlayer);
+    updateCellContent(cell, false, currentPlayer);
 
     if (checkWin()) {
         gameStatus.textContent = translation[currentLang].statusWin();
         document.querySelectorAll(`.cell`).forEach(cell => {
-            cell.setAttribute('aria-disabled', true);
+            cell.disabled = true;
             if (cell.textContent.includes(`${currentPlayer}`)) cell.classList.add('winning');
         });
         gameActive = false;
@@ -60,30 +103,29 @@ function handleCellClick(cellIndex, cell) {
         return;
     }
 
+    // Cambiar el jugador
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     gameStatus.textContent = translation[currentLang].statusTurn();
-    highlightOldestMove(currentPlayer === 'X' ? xMoves : oMoves);
+    highlightOldestMove(moves[currentPlayer]);
 }
 
-function updateCellContent(cell, content, reset = false, player = '') {
-    if (reset && cell.getAttribute('tabindex') === '0') return;
-    if (reset) cell.className = 'cell';
-    cell.setAttribute('aria-disabled', !reset);
-    cell.setAttribute('tabindex', reset ? '0' : '-1');
-    cell.classList.toggle(`marker-${player}`, !reset && player !== '');
-    cell.innerHTML = reset
-        ? `<span class="marker-cell">${content}</span>`
-        : `${player}<span class="marker-order">${content}</span>`;
+function updateCellContent(cell, reset, player = '') {
+    if (reset && !cell.disabled) return;
+    const cellIndex = parseInt(cell.dataset.index);
+    reset ? cell.className = 'cell'
+        : cell.classList.add(`marker-${player}`);
+    cell.tabIndex = reset ? 0 : -1;
+    cell.disabled = !reset;
+    cell.innerHTML = reset ? `<span class="marker-cell">${cellIndex + 1}</span>`
+        : `<span class="marker-cell">${cellIndex + 1}</span>${player}<span class="marker-order">${movesCount}</span>`;
 }
 
 function highlightOldestMove(moves) {
     if (document.querySelector('.old')) document.querySelector('.old').classList.remove('old');
-    if (moves.length >= 3) {
-        const oldestMoveIndex = moves[0];
-        document.querySelector(`[data-index="${oldestMoveIndex}"]`).classList.add('old');
-    }
+    if (moves.length >= 3) document.querySelector(`[data-index="${moves[0]}"]`).classList.add('old');
 }
 
+// Chequear si el jugador actual ganó
 function checkWin() {
     return winPatterns.some(pattern => {
         const [a, b, c] = pattern;
@@ -94,28 +136,21 @@ function checkWin() {
 }
 
 function resetGame() {
+
     currentPlayer = 'X';
     gameActive = true;
     gameState = Array(9).fill('');
     movesCount = 0;
-    xMoves = [];
-    oMoves = [];
+    moves = { X: [], O: [], total: [] };
 
-    document.querySelectorAll('.cell').forEach((cell, index) => {
-        cell.setAttribute('aria-disabled', false);
-        updateCellContent(cell, cellIndexs[index] + 1, true);
-    });
+    document.querySelectorAll('.cell').forEach(cell => updateCellContent(cell, true));
 
     gameStatus.textContent = translation[currentLang].statusTurn();
 }
 
-document.addEventListener('keydown', handleKeyDown);
-
-function handleKeyDown(event) {
+document.addEventListener('keydown', event => {
     if (event.key >= '1' && event.key <= '9') {
         const cell = document.querySelector(`.cell[data-index="${event.key - 1}"]`);
-        if (cell.getAttribute('aria-disabled') === 'false') cell.focus();
-    } else if (event.key === '0') {
-        resetBtn.focus();
-    }
-}
+        cell.focus();
+    } else if (event.key === '0') resetBtn.focus();
+});

@@ -31,26 +31,44 @@
 </head>
 
 <body>
-    <small class="lang-link" aria-label="Change language to Spanish"><a href="./es/">Español</a></small>
 
     <header>
         <h1>Limitac - Three Mark Limit</h1>
+        <small class="lang-link"><a href="./es/" aria-label="Change language to Spanish">Español</a></small>
     </header>
 
     <main>
         <section class="game-container" aria-label="Main game section">
-            <h2 id="status" aria-live="polite">Player X's turn</h2>
+            <strong id="gameStatus" aria-live="polite">Player X's turn</strong>
 
             <div id="board" role="grid" aria-label="Tic Tac Toe Board" aria-describedby="instructions">
-                <button class="cell" data-index="6" aria-label="Cell 7" aria-live="polite" role="gridcell" onclick="handleCellClick(6, this)"></button>
-                <button class="cell" data-index="7" aria-label="Cell 8" aria-live="polite" role="gridcell" onclick="handleCellClick(7, this)"></button>
-                <button class="cell" data-index="8" aria-label="Cell 9" aria-live="polite" role="gridcell" onclick="handleCellClick(8, this)"></button>
-                <button class="cell" data-index="3" aria-label="Cell 4" aria-live="polite" role="gridcell" onclick="handleCellClick(3, this)"></button>
-                <button class="cell" data-index="4" aria-label="Cell 5" aria-live="polite" role="gridcell" onclick="handleCellClick(4, this)"></button>
-                <button class="cell" data-index="5" aria-label="Cell 6" aria-live="polite" role="gridcell" onclick="handleCellClick(5, this)"></button>
-                <button class="cell" data-index="0" aria-label="Cell 1" aria-live="polite" role="gridcell" onclick="handleCellClick(0, this)"></button>
-                <button class="cell" data-index="1" aria-label="Cell 2" aria-live="polite" role="gridcell" onclick="handleCellClick(1, this)"></button>
-                <button class="cell" data-index="2" aria-label="Cell 3" aria-live="polite" role="gridcell" onclick="handleCellClick(2, this)"></button>
+                <button class="cell" data-index="6" aria-label="Cell 7" aria-live="polite" role="gridcell" onclick="handleCellClick(6, this)">
+                    <span class="marker-cell">7</span>
+                </button>
+                <button class="cell" data-index="7" aria-label="Cell 8" aria-live="polite" role="gridcell" onclick="handleCellClick(7, this)">
+                    <span class="marker-cell">8</span>
+                </button>
+                <button class="cell" data-index="8" aria-label="Cell 9" aria-live="polite" role="gridcell" onclick="handleCellClick(8, this)">
+                    <span class="marker-cell">9</span>
+                </button>
+                <button class="cell" data-index="3" aria-label="Cell 4" aria-live="polite" role="gridcell" onclick="handleCellClick(3, this)">
+                    <span class="marker-cell">4</span>
+                </button>
+                <button class="cell" data-index="4" aria-label="Cell 5" aria-live="polite" role="gridcell" onclick="handleCellClick(4, this)">
+                    <span class="marker-cell">5</span>
+                </button>
+                <button class="cell" data-index="5" aria-label="Cell 6" aria-live="polite" role="gridcell" onclick="handleCellClick(5, this)">
+                    <span class="marker-cell">6</span>
+                </button>
+                <button class="cell" data-index="0" aria-label="Cell 1" aria-live="polite" role="gridcell" onclick="handleCellClick(0, this)">
+                    <span class="marker-cell">1</span>
+                </button>
+                <button class="cell" data-index="1" aria-label="Cell 2" aria-live="polite" role="gridcell" onclick="handleCellClick(1, this)">
+                    <span class="marker-cell">2</span>
+                </button>
+                <button class="cell" data-index="2" aria-label="Cell 3" aria-live="polite" role="gridcell" onclick="handleCellClick(2, this)">
+                    <span class="marker-cell">3</span>
+                </button>
             </div>
 
             <button id="resetBtn" aria-label="Reiniciar Juego" onclick="resetGame()">Reset</button>
