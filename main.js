@@ -117,7 +117,7 @@ function updateCellContent(cell, reset, player = '') {
     cell.tabIndex = reset ? 0 : -1;
     cell.disabled = !reset;
     cell.innerHTML = reset ? `<span class="marker-cell">${cellIndex + 1}</span>`
-        : `<span class="marker">${player}</span><span class="marker-order">${movesCount}</span>`;
+        : `${player}<span class="marker-order">${movesCount}</span>`;
 }
 
 function highlightOldestMove(moves) {

@@ -131,9 +131,7 @@ h2,
 }
 
 .marker-X {
-    .marker {
-        color: var(--color-marker-X);
-    }
+    color: var(--color-marker-X);
 
     &.old {
         color: var(--color-marker-X-old);
@@ -141,9 +139,7 @@ h2,
 }
 
 .marker-O {
-    .marker {
-        color: var(--color-marker-O);
-    }
+    color: var(--color-marker-O);
 
     &.old {
         color: var(--color-marker-O-old);
