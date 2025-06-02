@@ -117,11 +117,12 @@ function updateCellContent(cell, reset, player = '') {
     cell.tabIndex = reset ? 0 : -1;
     cell.disabled = !reset;
     cell.innerHTML = reset ? `<span class="marker-cell">${cellIndex + 1}</span>`
-        : `<span class="marker-cell">${cellIndex + 1}</span>${player}<span class="marker-order">${movesCount}</span>`;
+        : `<span class="marker">${player}</span><span class="marker-order">${movesCount}</span>`;
 }
 
 function highlightOldestMove(moves) {
-    if (document.querySelector('.old')) document.querySelector('.old').classList.remove('old');
+    const oldCell = document.querySelector('.old');
+    if (oldCell) oldCell.classList.remove('old');
     if (moves.length >= 3) document.querySelector(`[data-index="${moves[0]}"]`).classList.add('old');
 }
 
@@ -136,7 +137,6 @@ function checkWin() {
 }
 
 function resetGame() {
-
     currentPlayer = 'X';
     gameActive = true;
     gameState = Array(9).fill('');

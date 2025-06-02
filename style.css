@@ -14,11 +14,12 @@
     --outline-color-board: #0002;
     --bg-cell: #111;
     --bg-hover-cell: #181818;
+    --outline-color-cell: #444;
     --color-marker-cell: #333;
-    --color-marker-X: #46f;
-    --color-marker-O: #f46;
-    --color-marker-X-old: #34a;
-    --color-marker-O-old: #a34;
+    --color-marker-X: #48f;
+    --color-marker-O: #f48;
+    --color-marker-X-old: #36a;
+    --color-marker-O-old: #a36;
     --color-winning: #6d6;
 }
 
@@ -33,11 +34,12 @@
         --outline-color-board: #0001;
         --bg-cell: #fff;
         --bg-hover-cell: #eee;
+        --outline-color-cell: #888;
         --color-marker-cell: #aaa;
-        --color-marker-X: #44f;
-        --color-marker-O: #f44;
-        --color-marker-X-old: #aaf;
-        --color-marker-O-old: #faa;
+        --color-marker-X: #46f;
+        --color-marker-O: #f46;
+        --color-marker-X-old: #abf;
+        --color-marker-O-old: #fab;
         --color-winning: #4d5;
     }
 }
@@ -119,6 +121,7 @@ h2,
 
         &:hover, &:focus-visible {
             background: var(--bg-hover-cell);
+            outline: 2px solid var(--outline-color-cell);
         }
     }
 }
@@ -128,7 +131,9 @@ h2,
 }
 
 .marker-X {
-    color: var(--color-marker-X);
+    .marker {
+        color: var(--color-marker-X);
+    }
 
     &.old {
         color: var(--color-marker-X-old);
@@ -136,7 +141,9 @@ h2,
 }
 
 .marker-O {
-    color: var(--color-marker-O);
+    .maker {
+        color: var(--color-marker-O);
+    }
 
     &.old {
         color: var(--color-marker-O-old);
@@ -153,13 +160,8 @@ h2,
     pointer-events: none;
     top: 5px;
     left: 5px;
-    display: none;
     font-size: .6rem;
     color: var(--color-marker-cell);
-
-    &:last-child {
-        display: revert;
-    }
 }
 
 .marker-order {
