@@ -16,8 +16,6 @@ Play it here:
 
 ![Preview](assets/image-preview-2.png)
 
-<p align="right"><a href="#top">🔼</a></p>
-
 ---
 
 > [!IMPORTANT]  
