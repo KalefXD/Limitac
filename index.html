@@ -2,26 +2,26 @@
 <html lang="en">
 
 <head>
-    <title>Limitac - Tic Tac Toe game with a three-mark limit</title>
+    <title>Limitac - Tic Tac Toe with limited rules</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <meta name="description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
-    <meta name="keywords" content="Limitac, Tic Tac Toe, Three mark limit, Noughts and crosses">
+    <meta name="description" content="Limitac is a variation of the classic Tic Tac Toe game with additional rules that introduce strategy and limitations.">
+    <meta name="keywords" content="Limitac, Tic Tac Toe, Three mark limit, Noughts and crosses, Infinite Tic Tac Toe">
     <meta name="author" content="KalefXD">
     <link rel="alternate" hreflang="en" href="https://kalefxd.github.io/Limitac/">
     <link rel="alternate" hreflang="es" href="https://kalefxd.github.io/Limitac/es/">
 
-    <meta property="og:title" content="Limitac - Tic Tac Toe game with a three-mark limit">
-    <meta property="og:description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
+    <meta property="og:title" content="Limitac - Tic Tac Toe with limited rules">
+    <meta property="og:description" content="Limitac is a variation of the classic Tic Tac Toe game with additional rules that introduce strategy and limitations.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kalefxd.github.io/Limitac">
     <meta property="og:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Limitac - Tic Tac Toe game with a three-mark limit">
-    <meta name="twitter:description" content="Limitac implements a new rule that limits the number of marks on the board. When a player places a fourth mark, the oldest one is removed.">
+    <meta name="twitter:title" content="Limitac - Tic Tac Toe with limited rules">
+    <meta name="twitter:description" content="Limitac is a variation of the classic Tic Tac Toe game with additional rules that introduce strategy and limitations.">
     <meta name="twitter:image" content="https://kalefxd.github.io/Limitac/assets/image-preview-1.png">
     <meta name="twitter:site" content="@KalefXD9876">
     <meta name="twitter:creator" content="@KalefXD9876">
@@ -35,8 +35,31 @@
 <body>
 
     <header>
-        <h1>Limitac - Three Mark Limit</h1>
-        <small class="lang-link"><a href="./es/" aria-label="Change language to Spanish">Español</a></small>
+        <h1>Limitac - Tic Tac Toe with limited rules</h1>
+        <details class="options">
+            <summary>Options</summary>
+            <ul>
+                <li class="option-wrapper">
+                    <label for="showNumber">Show movement numbers</label><input type="checkbox" id="showNumber" checked>
+                </li>
+                <hr>
+                <li class="option-wrapper">
+                    <label for="limitMark">3-Marks limit</label><input type="checkbox" id="limitMark" checked>
+                </li>
+                <hr>
+                <li class="option-wrapper">
+                    <label for="limitMove">Move limit</label><input type="checkbox" id="limitMove" checked>
+                </li>
+                <hr>
+                <li class="option-wrapper">
+                    <label for="limitTime">Time limit (In development)</label><input type="checkbox" id="limitTime" disabled>
+                </li>
+                <hr>
+                <li class="option-wrapper">
+                    <a href="es/"">Version Spanish</a>
+                </li>
+            </ul>
+        </details>
     </header>
 
     <main>
@@ -79,9 +102,12 @@
 
     <section class="instructions-container">
         <h2>Instructions:</h2>
-        <p id="instructions">
-            Each player can have only three marks; when placing a fourth, the oldest one is removed, indicated by the lowest number.
-        </p>
+        <ul id="instructions">
+            <li>Make a row, column or diagonal of the same mark to win.</li>
+            <li class="limit-mark-text">Three marks per player; placing a fourth mark removes the oldest mark<span class="show-number-text">, indicated by the lowest number</span>.</li>
+            <li class="limit-time-text">(In development) If you take too long to place the mark, it will be placed in a random space.</li>
+            <li class="limit-move-text">You can only place one mark around the previous mark; if there is no room, the surrounding marks will be deleted.</li>
+        </ul>
     </section>
 </body>
 
