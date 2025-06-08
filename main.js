@@ -126,7 +126,7 @@ if (saved) {
         } else gameStatus.textContent = translation[currentLang].statusDraw;
     }
 
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.clear();
 }
 
 function handleCellClick(cellIndex, cell) {
@@ -143,6 +143,7 @@ function handleCellClick(cellIndex, cell) {
     }
 
     gameState[cellIndex] = currentPlayer;
+    moves.total.push(cellIndex);
     const { checking, winners } = checkWin();
 
     // Limitar las casillas lejanas. Y aliminar las marcas cercanas si no hay casillas cercanas.
@@ -170,7 +171,6 @@ function handleCellClick(cellIndex, cell) {
 
     movesCount++;
     currentMoves.push(cellIndex);
-    moves.total.push(cellIndex);
     updateCellContent(cell, false, currentPlayer);
 
     if (checking) {
