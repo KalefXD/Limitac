@@ -54,7 +54,8 @@ limitMark.addEventListener('change', () => {
 limitMove.addEventListener('change', () => {
     if (gameActive) {
         const freeCells = document.querySelectorAll('.cell:not(:has(.marker-count))');
-        if (limitMove.checked && gameActive && moves.total.length > 0) {
+        if (limitMove.checked) {
+            if (moves.total.length === 0) return document.querySelector('[data-index="4"]').disabled = true;
             const neigh = getNeighbors(moves.total[moves.total.length - 1]);
             const emptyNeigh = neigh.filter(i => gameState[i] === '');
             freeCells.forEach(cell => {
@@ -108,7 +109,9 @@ if (saved) {
     if (gameActive) {
         gameStatus.textContent = translation[currentLang].statusTurn();
         if (config.limitMark) highlightOldestMove(moves[currentPlayer]);
-        if (config.limitMove && moves.total.length > 0) {
+        if (config.limitMove) {
+            if (moves.total.length === 0) return document.querySelector('[data-index="4"]').disabled = true;
+
             const neigh = getNeighbors(moves.total[moves.total.length - 1]);
             const emptyNeigh = neigh.filter(i => gameState[i] === '');
             document.querySelectorAll('.cell:not(:has(.marker-count))').forEach(cell => {
@@ -147,7 +150,7 @@ function handleCellClick(cellIndex, cell) {
     const { checking, winners } = checkWin();
 
     // Limitar las casillas lejanas. Y aliminar las marcas cercanas si no hay casillas cercanas.
-    if (config.limitMove && moves.total.length > 0 && !checking) {
+    if (config.limitMove && !checking) {
         const neigh = getNeighbors(cellIndex);
         const emptyNeigh = neigh.filter(i => gameState[i] === '');
 
@@ -249,6 +252,7 @@ function resetGame() {
     moves = { X: [], O: [], total: [] };
 
     document.querySelectorAll('.cell').forEach(cell => updateCellContent(cell, true));
+    if (config.limitMove) document.querySelector('[data-index="4"]').disabled = true;
 
     gameStatus.textContent = translation[currentLang].statusTurn();
 }
