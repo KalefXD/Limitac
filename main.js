@@ -110,13 +110,13 @@ if (saved) {
         gameStatus.textContent = translation[currentLang].statusTurn();
         if (config.limitMark) highlightOldestMove(moves[currentPlayer]);
         if (config.limitMove) {
-            if (moves.total.length === 0) return document.querySelector('[data-index="4"]').disabled = true;
-
-            const neigh = getNeighbors(moves.total[moves.total.length - 1]);
-            const emptyNeigh = neigh.filter(i => gameState[i] === '');
-            document.querySelectorAll('.cell:not(:has(.marker-count))').forEach(cell => {
-                emptyNeigh.includes(parseInt(cell.dataset.index)) ? cell.disabled = false : cell.disabled = true;
-            });
+            if (moves.total.length > 0) {
+                const neigh = getNeighbors(moves.total[moves.total.length - 1]);
+                const emptyNeigh = neigh.filter(i => gameState[i] === '');
+                document.querySelectorAll('.cell:not(:has(.marker-count))').forEach(cell => {
+                    emptyNeigh.includes(parseInt(cell.dataset.index)) ? cell.disabled = false : cell.disabled = true;
+                });
+            } else document.querySelector('[data-index="4"]').disabled = true;
         }
     } else {
         const { checking, winners } = checkWin();
